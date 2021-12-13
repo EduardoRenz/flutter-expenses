@@ -3,6 +3,7 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'components/transaction_list.dart';
 import './components/transaction_form.dart';
+import './components/chart.dart';
 import 'models/transaction.dart';
 
 main() => runApp(ExpensesApp());
@@ -13,10 +14,21 @@ class ExpensesApp extends StatelessWidget {
     return MaterialApp(
         home: HomePage(),
         theme: ThemeData(
-          primarySwatch: Colors.green,
-          //accentColor: Colors.amber,
-          fontFamily: 'OpenSans',
-        ));
+            textTheme: const TextTheme(
+                headline6: TextStyle(
+                    fontFamily: 'OpenSans',
+                    fontSize: 18,
+                    fontWeight: FontWeight.bold)),
+            primarySwatch: Colors.green,
+            //accentColor: Colors.amber,
+            fontFamily: 'Quicksand',
+            appBarTheme: const AppBarTheme(
+              titleTextStyle: TextStyle(
+                fontFamily: 'OpenSans',
+                fontSize: 20,
+                fontWeight: FontWeight.bold,
+              ),
+            )));
   }
 }
 
@@ -26,20 +38,32 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  final _transactions = [
+  final List<Transaction> _transactions = [
+    Transaction(
+      id: 't0',
+      title: 'New Shoes',
+      value: 69.99,
+      date: DateTime.now().subtract(Duration(days: 30)),
+    ),
     Transaction(
       id: 't1',
       title: 'New Shoes',
       value: 69.99,
-      date: DateTime.now(),
+      date: DateTime.now().subtract(Duration(days: 3)),
     ),
     Transaction(
       id: 't2',
       title: 'Weekly Groceries',
       value: 16.53,
-      date: DateTime.now(),
+      date: DateTime.now().subtract(Duration(days: 4)),
     ),
   ];
+
+  List<Transaction> get _recentTransactions {
+    return _transactions.where((tr) {
+      return tr.date.isAfter(DateTime.now().subtract(Duration(days: 7)));
+    }).toList();
+  }
 
   void _addNewTransaction(String title, double value) {
     final newTransaction = Transaction(
@@ -82,9 +106,9 @@ class _HomePageState extends State<HomePage> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            const Card(
+            Card(
               color: Colors.blue,
-              child: Text('Gráfico'),
+              child: Chart(_recentTransactions),
               elevation: 5,
             ),
             TransactionList(_transactions),
