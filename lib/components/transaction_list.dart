@@ -30,43 +30,27 @@ class TransactionList extends StatelessWidget {
               itemBuilder: (ctx, index) {
                 final tr = transactions[index];
                 return Card(
-                    child: Row(
-                  children: [
-                    Container(
-                      margin: const EdgeInsets.symmetric(
-                        horizontal: 15,
-                        vertical: 10,
-                      ),
-                      decoration: BoxDecoration(
-                        border: Border.all(
-                          color:
-                              Theme.of(context).primaryColor.withOpacity(0.5),
-                          width: 2,
+                  elevation: 1,
+                  margin: EdgeInsets.symmetric(vertical: 3, horizontal: 5),
+                  child: ListTile(
+                    leading: CircleAvatar(
+                      radius: 30,
+                      child: Padding(
+                        padding: const EdgeInsets.all(6.0),
+                        child: FittedBox(
+                          child: Text('\$${tr.value}'),
                         ),
-                      ),
-                      padding: const EdgeInsets.all(10),
-                      child: Text(
-                        'R\$ ${tr.value}',
-                        style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                            fontSize: 20,
-                            color: Colors.purple),
                       ),
                     ),
-                    Column(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(tr.title,
-                            style: Theme.of(context).textTheme.headline6),
-                        Text(
-                          DateFormat('dd/MM/yyyy').format(tr.date).toString(),
-                          style: TextStyle(color: Colors.grey.shade500),
-                        ),
-                      ],
-                    )
-                  ],
-                ));
+                    title: Text(
+                      tr.title,
+                      style: Theme.of(context).textTheme.headline6,
+                    ),
+                    subtitle: Text(
+                      DateFormat.yMMMd().format(tr.date),
+                    ),
+                  ),
+                );
               },
             ),
     );
