@@ -42,47 +42,54 @@ class _TransactionFormState extends State<TransactionForm> {
 
   @override
   Widget build(BuildContext context) {
-    return Card(
-      elevation: 5,
-      child: Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: Column(
-          children: [
-            TextField(
+    return SingleChildScrollView(
+      child: Card(
+        elevation: 5,
+        child: Padding(
+          padding: EdgeInsets.only(
+            top: 10,
+            left: 10,
+            right: 10,
+            bottom: 10 + MediaQuery.of(context).viewInsets.bottom,
+          ),
+          child: Column(
+            children: [
+              TextField(
+                  onSubmitted: (value) => _submitForm(),
+                  controller: _titleController,
+                  decoration: InputDecoration(labelText: 'Title')),
+              TextField(
                 onSubmitted: (value) => _submitForm(),
-                controller: _titleController,
-                decoration: InputDecoration(labelText: 'Title')),
-            TextField(
-              onSubmitted: (value) => _submitForm(),
-              keyboardType:
-                  const TextInputType.numberWithOptions(decimal: true),
-              controller: _amountController,
-              decoration: InputDecoration(labelText: 'Value (R\$)'),
-            ),
-            Row(children: [
-              _transactionDate != null
-                  ? Text(DateFormat.yMMMd().format(_transactionDate))
-                  : Text('No date selected'),
-              TextButton(
-                child: Text('Select date',
-                    style: TextStyle(
-                        color: Theme.of(context).primaryColor,
-                        fontWeight: FontWeight.bold)),
-                onPressed: _showDatePicker,
-              )
-            ]),
-            Container(
-              margin:
-                  EdgeInsets.only(top: Theme.of(context).buttonTheme.height),
-              child: ElevatedButton(
-                  onPressed: () {
-                    _submitForm();
-                  },
-                  child: const Text(
-                    "New Transaction",
-                  )),
-            ),
-          ],
+                keyboardType:
+                    const TextInputType.numberWithOptions(decimal: true),
+                controller: _amountController,
+                decoration: InputDecoration(labelText: 'Value (R\$)'),
+              ),
+              Row(children: [
+                _transactionDate != null
+                    ? Text(DateFormat.yMMMd().format(_transactionDate))
+                    : Text('No date selected'),
+                TextButton(
+                  child: Text('Select date',
+                      style: TextStyle(
+                          color: Theme.of(context).primaryColor,
+                          fontWeight: FontWeight.bold)),
+                  onPressed: _showDatePicker,
+                )
+              ]),
+              Container(
+                margin:
+                    EdgeInsets.only(top: Theme.of(context).buttonTheme.height),
+                child: ElevatedButton(
+                    onPressed: () {
+                      _submitForm();
+                    },
+                    child: const Text(
+                      "New Transaction",
+                    )),
+              ),
+            ],
+          ),
         ),
       ),
     );
