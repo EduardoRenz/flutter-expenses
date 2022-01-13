@@ -110,16 +110,15 @@ class _HomePageState extends State<HomePage> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            if (isLandscape)
-              if (_showChart || !isLandscape)
-                Container(
-                  height: availableHeight * (isLandscape ? 0.7 : 0.3),
-                  child: Card(
-                    color: Colors.blue,
-                    child: Chart(_recentTransactions),
-                    elevation: 5,
-                  ),
+            if (_showChart || !isLandscape)
+              Container(
+                height: availableHeight * (isLandscape ? 0.7 : 0.3),
+                child: Card(
+                  color: Colors.blue,
+                  child: Chart(_recentTransactions),
+                  elevation: 5,
                 ),
+              ),
             if (!_showChart || !isLandscape)
               Container(
                   height: availableHeight * 0.7,
