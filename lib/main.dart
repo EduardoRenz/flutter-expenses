@@ -107,24 +107,26 @@ class _HomePageState extends State<HomePage> {
           ),
         ],
       ),
-      body: SingleChildScrollView(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: [
-            if (_showChart || !isLandscape)
-              Container(
-                height: availableHeight * (isLandscape ? 0.7 : 0.3),
-                child: Card(
-                  color: Colors.blue,
-                  child: Chart(_recentTransactions),
-                  elevation: 5,
+      body: SafeArea(
+        child: SingleChildScrollView(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+              if (_showChart || !isLandscape)
+                Container(
+                  height: availableHeight * (isLandscape ? 0.7 : 0.3),
+                  child: Card(
+                    color: Colors.blue,
+                    child: Chart(_recentTransactions),
+                    elevation: 5,
+                  ),
                 ),
-              ),
-            if (!_showChart || !isLandscape)
-              Container(
-                  height: availableHeight * 0.7,
-                  child: TransactionList(_transactions, _deleteTransaction)),
-          ],
+              if (!_showChart || !isLandscape)
+                Container(
+                    height: availableHeight * 0.7,
+                    child: TransactionList(_transactions, _deleteTransaction)),
+            ],
+          ),
         ),
       ),
       floatingActionButton: FloatingActionButton(
