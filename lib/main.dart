@@ -78,11 +78,12 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
-    bool isLandscape =
-        MediaQuery.of(context).orientation == Orientation.landscape;
+    final mediaQuery = MediaQuery.of(context);
+
+    bool isLandscape = mediaQuery.orientation == Orientation.landscape;
 
     final availableHeight = MediaQuery.of(context).size.height -
-        MediaQuery.of(context).padding.top -
+        mediaQuery.padding.top -
         kToolbarHeight;
 
     return Scaffold(
