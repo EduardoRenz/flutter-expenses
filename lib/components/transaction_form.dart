@@ -5,7 +5,7 @@ import 'package:intl/intl.dart';
 class TransactionForm extends StatefulWidget {
   final void Function(String title, double value, DateTime date) onSubmit;
 
-  TransactionForm(this.onSubmit);
+  const TransactionForm(this.onSubmit);
 
   @override
   State<TransactionForm> createState() => _TransactionFormState();
@@ -69,7 +69,7 @@ class _TransactionFormState extends State<TransactionForm> {
               Row(children: [
                 _transactionDate != null
                     ? Text(DateFormat.yMMMd().format(_transactionDate))
-                    : Text('No date selected'),
+                    : const Text('No date selected'),
                 TextButton(
                   child: Text('Select date',
                       style: TextStyle(

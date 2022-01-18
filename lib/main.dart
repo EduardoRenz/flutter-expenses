@@ -113,7 +113,7 @@ class _HomePageState extends State<HomePage> {
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
               if (_showChart || !isLandscape)
-                Container(
+                SizedBox(
                   height: availableHeight * (isLandscape ? 0.7 : 0.3),
                   child: Card(
                     color: Colors.blue,
@@ -122,7 +122,7 @@ class _HomePageState extends State<HomePage> {
                   ),
                 ),
               if (!_showChart || !isLandscape)
-                Container(
+                SizedBox(
                     height: availableHeight * 0.7,
                     child: TransactionList(_transactions, _deleteTransaction)),
             ],
